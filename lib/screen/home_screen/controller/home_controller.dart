@@ -28,9 +28,11 @@ class HomeController extends GetxController {
 
   /// Returns sorted repositories based on current sort option
   List<Repository> get sortedRepositories {
+    // Access the observable to trigger reactivity
+    final currentSort = _sortOption.value;
     final repos = List<Repository>.from(_repositories);
 
-    switch (_sortOption.value) {
+    switch (currentSort) {
       case SortOption.name:
         repos.sort(
             (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
@@ -87,6 +89,8 @@ class HomeController extends GetxController {
   /// Sets the sort option for repositories
   void setSortOption(SortOption option) {
     _sortOption.value = option;
+    // Force refresh of sortedRepositories by triggering observable update
+    _repositories.refresh();
   }
 
   /// Loads the saved view mode preference from storage

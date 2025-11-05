@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inilab_practice/screen/splash_screen/controller/splash_screen_controller.dart';
+import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -47,7 +48,7 @@ class SplashScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 32),
 
                 // Animated title with slide up
                 TweenAnimationBuilder<double>(
@@ -91,7 +92,7 @@ class SplashScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 48),
 
                 // Loading indicator with fade in
                 TweenAnimationBuilder<double>(
@@ -100,14 +101,11 @@ class SplashScreen extends StatelessWidget {
                   builder: (context, value, child) {
                     return Opacity(
                       opacity: value,
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 40,
                         height: 40,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            theme.colorScheme.primary,
-                          ),
                         ),
                       ),
                     );

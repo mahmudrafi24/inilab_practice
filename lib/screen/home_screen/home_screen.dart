@@ -149,6 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Obx(() {
+        // Access sortOption to ensure Obx tracks it for rebuilds
+        _controller.sortOption;
+
         // Loading state with animation
         if (_controller.isLoading) {
           return Center(
@@ -228,8 +231,10 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             child: _controller.viewMode == ViewMode.list
-                ? _buildListView()
-                : _buildGridView(),
+                ? _buildListView(
+                    key: ValueKey('list_${_controller.sortOption.name}'))
+                : _buildGridView(
+                    key: ValueKey('grid_${_controller.sortOption.name}')),
           ),
         );
       }),
@@ -237,14 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Builds the list view for repositories
-  Widget _buildListView() {
+  Widget _buildListView({Key? key}) {
     return LayoutBuilder(
+      key: key,
       builder: (context, constraints) {
         // Responsive padding for larger screens
         final horizontalPadding = constraints.maxWidth > 600 ? 24.0 : 0.0;
 
         return ListView.builder(
-          key: const ValueKey('list_view'),
           physics: const AlwaysScrollableScrollPhysics(),
           itemCount: _controller.sortedRepositories.length,
           padding:
@@ -281,8 +286,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Builds the grid view for repositories
-  Widget _buildGridView() {
+  Widget _buildGridView({Key? key}) {
     return LayoutBuilder(
+      key: key,
       builder: (context, constraints) {
         // Responsive grid columns based on screen width
         final crossAxisCount = constraints.maxWidth > 900
@@ -291,7 +297,6 @@ class _HomeScreenState extends State<HomeScreen> {
         final padding = constraints.maxWidth > 600 ? 24.0 : 16.0;
 
         return GridView.builder(
-          key: const ValueKey('grid_view'),
           physics: const AlwaysScrollableScrollPhysics(),
           padding: EdgeInsets.all(padding),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
