@@ -28,11 +28,11 @@ class RepositoryGridCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         splashColor: theme.colorScheme.primary.withValues(alpha: 0.1),
         highlightColor: theme.colorScheme.primary.withValues(alpha: 0.05),
-        child: Container(
-          padding: const EdgeInsets.all(16),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Owner avatar with shadow
               Center(
@@ -52,12 +52,12 @@ class RepositoryGridCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     child: CachedNetworkImage(
                       imageUrl: repository.owner.avatarUrl,
-                      width: 64,
-                      height: 64,
+                      width: 54,
+                      height: 54,
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
-                        width: 64,
-                        height: 64,
+                        width: 54,
+                        height: 54,
                         color: theme.brightness == Brightness.dark
                             ? Colors.grey[800]
                             : Colors.grey[300],
@@ -92,27 +92,25 @@ class RepositoryGridCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 06),
 
               // Repository name
-              Expanded(
-                child: Center(
-                  child: AppText.bodyLarge(
-                    repository.name,
-                    fontWeight: FontWeight.w600,
-                    color: theme.colorScheme.primary,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    height: 1.3,
-                  ),
-                ),
+              AppText.bodyLarge(
+                repository.name,
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.primary,
+                fontSize: 12,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                height: 1.3,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 05),
 
               // Language and stars with better styling
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   // Language
                   if (repository.language != null)
@@ -148,7 +146,7 @@ class RepositoryGridCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                  if (repository.language != null) const SizedBox(height: 8),
+                  if (repository.language != null) const SizedBox(height: 6),
 
                   // Stars
                   Container(
@@ -169,7 +167,7 @@ class RepositoryGridCard extends StatelessWidget {
                           size: 14,
                           color: Colors.amber[700],
                         ),
-                        const SizedBox(width: 6),
+                        const SizedBox(width: 4),
                         AppText.bodySmall(
                           _formatStarCount(repository.stargazersCount),
                           color: theme.textTheme.bodySmall?.color,

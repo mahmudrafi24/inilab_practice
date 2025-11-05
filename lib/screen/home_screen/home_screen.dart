@@ -298,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
-            childAspectRatio: 0.85,
+            childAspectRatio: 0.82,
           ),
           itemCount: _controller.sortedRepositories.length,
           itemBuilder: (context, index) {

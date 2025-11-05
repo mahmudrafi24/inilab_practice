@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
 
     return Obx(
       () => GetMaterialApp(
+        
         title: 'GitHub Repo Viewer',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
