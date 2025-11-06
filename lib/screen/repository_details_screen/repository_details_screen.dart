@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:inilab_practice/screen/repository_details_screen/controller/repository_details_controller.dart';
 import 'package:inilab_practice/widgets/app_text/app_text.dart';
 import 'package:inilab_practice/utils/app_color/app_color.dart';
-import 'package:sizer/sizer.dart';
+import 'package:inilab_practice/utils/app_size/app_size.dart';
 
 class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
   const RepositoryDetailsScreen({super.key});
@@ -43,7 +43,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: maxWidth),
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(20.sp),
+                padding: EdgeInsets.all(AppSize.width(20)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -64,7 +64,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                       child: _buildRepositoryHeader(context, repository),
                     ),
 
-                    SizedBox(height: 24.h),
+                    SizedBox(height: AppSize.height(24)),
 
                     // Statistics Section with animation
                     TweenAnimationBuilder<double>(
@@ -83,7 +83,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                       child: _buildStatisticsSection(context, repository),
                     ),
 
-                    SizedBox(height: 24.h),
+                    SizedBox(height: AppSize.height(24)),
 
                     // Information Section with animation
                     TweenAnimationBuilder<double>(
@@ -101,7 +101,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                       },
                       child: _buildInformationSection(context, repository),
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: AppSize.height(24)),
                   ],
                 ),
               ),
@@ -115,7 +115,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
   Widget _buildRepositoryHeader(BuildContext context, repository) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(24.sp),
+      padding: EdgeInsets.all(AppSize.width(24)),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
             ? AppColor.lightSurface
@@ -129,7 +129,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
             repository.name,
             fontWeight: FontWeight.bold,
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppSize.height(8)),
 
           // Description
           if (repository.description != null)
@@ -139,7 +139,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                   ? AppColor.lightTextSecondary
                   : AppColor.darkTextSecondary,
             ),
-          SizedBox(height: 16.h),
+          SizedBox(height: AppSize.height(16)),
 
           // Owner Information
           Row(
@@ -148,19 +148,19 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                 borderRadius: BorderRadius.circular(20),
                 child: CachedNetworkImage(
                   imageUrl: repository.owner.avatarUrl,
-                  width: 40.w,
-                  height: 40.h,
+                  width: AppSize.width(40),
+                  height: AppSize.height(40),
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Container(
-                    width: 40.w,
-                    height: 40.h,
+                    width: AppSize.width(40),
+                    height: AppSize.height(40),
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey[800]
                         : Colors.grey[300],
                     child: Center(
                       child: SizedBox(
-                        width: 16.w,
-                        height: 16.h,
+                        width: AppSize.width(16),
+                        height: AppSize.height(16),
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(
@@ -171,14 +171,14 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                     ),
                   ),
                   errorWidget: (context, url, error) => Container(
-                    width: 40.w,
-                    height: 40.h,
+                    width: AppSize.width(40),
+                    height: AppSize.height(40),
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.grey[800]
                         : Colors.grey[300],
                     child: Icon(
                       Icons.person,
-                      size: 24.sp,
+                      size: AppSize.width(24),
                       color: Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey[600]
                           : Colors.grey[500],
@@ -186,7 +186,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                   ),
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppSize.width(12)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -211,7 +211,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
 
   Widget _buildStatisticsSection(BuildContext context, repository) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.width(24)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -219,7 +219,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
             'Statistics',
             fontWeight: FontWeight.bold,
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: AppSize.height(12)),
           Row(
             children: [
               Expanded(
@@ -231,7 +231,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                   color: Colors.amber,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppSize.width(12)),
               Expanded(
                 child: _buildStatCard(
                   context,
@@ -241,7 +241,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                   color: Colors.blue,
                 ),
               ),
-              SizedBox(width: 12.w),
+              SizedBox(width: AppSize.width(12)),
               Expanded(
                 child: _buildStatCard(
                   context,
@@ -266,22 +266,22 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
     required Color color,
   }) {
     return Container(
-      padding: EdgeInsets.all(16.sp),
+      padding: EdgeInsets.all(AppSize.width(16)),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
             ? AppColor.lightSurface
             : AppColor.darkSurface,
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(AppSize.width(12)),
       ),
       child: Column(
         children: [
-          Icon(icon, color: color, size: 32.sp),
-          SizedBox(height: 8.h),
+          Icon(icon, color: color, size: AppSize.width(32)),
+          SizedBox(height: AppSize.height(8)),
           AppText.headlineMedium(
             value,
             fontWeight: FontWeight.bold,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSize.height(4)),
           AppText.bodySmall(
             label,
             color: Theme.of(context).brightness == Brightness.light
@@ -297,7 +297,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
     final dateFormat = DateFormat('MMM dd, yyyy');
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.sp),
+      padding: EdgeInsets.symmetric(horizontal: AppSize.width(24)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -305,7 +305,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
             'Information',
             fontWeight: FontWeight.bold,
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: AppSize.height(12)),
 
           // Language
           if (repository.language != null)
@@ -341,7 +341,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
             isUrl: true,
           ),
 
-          SizedBox(height: 16.h),
+          SizedBox(height: AppSize.height(16)),
         ],
       ),
     );
@@ -355,19 +355,18 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
     bool isUrl = false,
   }) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.h
-      ),
+      padding: EdgeInsets.only(bottom: AppSize.height(16)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
             icon,
-            size: 20.sp,
+            size: AppSize.width(20),
             color: Theme.of(context).brightness == Brightness.light
                 ? AppColor.lightTextSecondary
                 : AppColor.darkTextSecondary,
           ),
-          SizedBox(width: 12.w),
+          SizedBox(width: AppSize.width(12)),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -378,7 +377,7 @@ class RepositoryDetailsScreen extends GetView<RepositoryDetailsController> {
                       ? AppColor.lightTextSecondary
                       : AppColor.darkTextSecondary,
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: AppSize.height(4)),
                 AppText.bodyMedium(
                   value,
                   fontWeight: FontWeight.w500,

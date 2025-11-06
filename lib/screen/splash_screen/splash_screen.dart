@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inilab_practice/screen/splash_screen/controller/splash_screen_controller.dart';
-import 'package:sizer/sizer.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
